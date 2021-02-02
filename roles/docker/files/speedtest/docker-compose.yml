@@ -1,0 +1,37 @@
+---
+version: '3.7'
+services:
+  db:
+    image: influxdb
+    container_name: influxdb
+    volumes:
+      - "data:/var/lib/influxdb"
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    restart: unless-stopped
+    env_file:
+      - ./env/db.env
+  web:
+    build: ./speedweb
+    #   image: pedrocesarti/internet-speedtest-docker:speedweb
+    container_name: speedweb
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
+    restart: unless-stopped
+    environment:
+      - GF_SERVER_ROOT_URL=http://localhost
+      - GF_SECURITY_ADMIN_PASSWORD=teste
+  testing:
+    build: ./speedtest
+    #   image: pedrocesarti/internet-speedtest-docker:speedtest
+    container_name: speedtest
+    links:
+      - db:db
+    restart: unless-stopped
+    env_file:
+      - ./env/testing.env
+volumes:
+  data:

@@ -1,0 +1,15 @@
+# Email Tasks
+- hosts: localhost
+  tasks:
+  - name: Sending an e-mail using Gmail SMTP servers
+    mail:
+      host: smtp.email.com
+      port: 587
+      username: example@email.com
+      password: 'password'
+      to: 
+      - 
+      cc:  
+      subject: Ansible-report
+      body: System {{ ansible_hostname }} has been successfully generated and sent this email test.
+    delegate_to: localhost

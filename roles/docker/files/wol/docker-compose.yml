@@ -1,0 +1,12 @@
+version: '3'
+services:
+  wol:
+    environment:
+      - WOLHTTPPORT=8082
+    container_name: wol
+    image: local/go-rest-wol
+    build: .
+    ports:
+      - "8082:8080"
+    network_mode: host
+    restart: on-failure

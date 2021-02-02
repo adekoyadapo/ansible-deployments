@@ -1,0 +1,6 @@
+# Disk Information
+Device		MountPoint		Used[GB]	Free[GB]	Total[GB]	%
+{% set used = 0 %}
+{% for dev in my_devs %}
+{{ dev[0] }}	{{ dev[1] }}	{{ '%0.2f'| format((dev[2]|int - dev[3]|int) / 1000000000)|float }}
+{% endfor %}

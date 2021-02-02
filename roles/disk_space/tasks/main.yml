@@ -1,0 +1,47 @@
+---
+# tasks file for disk_space
+- set_fact:
+    my_devices: "{{ ansible_mounts|
+                    rejectattr('device', 'match', '^.*loop')|
+                    map(attribute='device') | list }}"
+- debug:
+    msg: "{{ item }}"
+  loop: "{{ my_devices }}"
+
+- set_fact:
+    my_devs: "{{ my_devs|default([]) +
+                 [ansible_mounts|
+                  selectattr('device', 'match', my_regex)|
+                  list|
+                  json_query(my_query)]|first }}"
+  loop: "{{ my_devices }}"
+
+- debug:
+    msg: "device: {{ dev }}
+          mountpoint: {{ mount_point }}
+          size[GB]: {{ total_size }}
+          used[GB]: {{ used }}
+          free[GB]: {{ free }}
+          usage[%]: {{ usage }}"
+  loop: "{{ my_devs }}"
+
+- name: use template
+  template:
+    src: disk_space2.j2
+    dest: "~/sites/{{ inventory_hostname }}"
+  delegate_to: localhost
+
+# Email Tasks
+#- name: Sending an e-mail using Gmail SMTP servers
+#  mail:
+#    host: smtp.email.com
+#    port: 587
+#    username: example@email.com
+#    password: ''
+#    to:
+#    - 
+#    cc:  
+#    subject: Ansible-disk-report for {{ inventory_hostname }}
+#    subtype: html
+#    body: "{{ lookup('file', '~/sites/email-report.html') }}"
+#  delegate_to: localhost

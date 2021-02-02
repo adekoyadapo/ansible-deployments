@@ -1,0 +1,19 @@
+---
+- name: Copy directory {{ project_name }} over
+  copy:
+    src: guacomole
+    dest: /home/ubuntu
+  tags:
+  - copy
+
+- name: Create and start {{ project_name }} services
+  docker_compose:
+    project_src: guacomole
+  register: output
+
+- debug:
+    var: output
+
+- assert:
+    that:
+      - "guacomole.guacomole.state.running"

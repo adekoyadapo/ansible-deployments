@@ -1,0 +1,25 @@
+---
+version: "3.7"
+services:
+  openvpn-as:
+    image: linuxserver/openvpn-as
+    container_name: openvpn-as
+    hostname: openvpn-as
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Edmonton
+      - INTERFACE=ens192
+    volumes:
+      - vpn_config:/config
+    expose:
+      - "943"
+      - "9443"
+      - "1194/udp"
+    restart: unless-stopped
+    network_mode: host
+volumes:
+  vpn_config:

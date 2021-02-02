@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;    
+}
+</style>
+</head>
+<body>
+<h2>Health Check Update</h2>
+<h3>dkr-rasberry.ace.home</h3>
+<table style="width:50%">
+  <TR>
+    <th>Device</th>
+    <th>MountPoint</th>
+    <th>Used[GB]</th>
+    <th>Total[GB]</th>
+    <th>Free[GB]</th>
+    <th>Usage[%]</th>
+  </TR>
+<TR>
+   <TD>/dev/mmcblk0p2</TD>
+   <TD>/</TD>
+   <TD>6.87</TD>
+   <TD>62.72</TD>
+   <TD>55.85</TD>
+   <TD>10.9</TD>
+</TR>
+<TR>
+   <TD>/dev/mmcblk0p1</TD>
+   <TD>/boot/firmware</TD>
+   <TD>0.1</TD>
+   <TD>0.26</TD>
+   <TD>0.16</TD>
+   <TD>38.1</TD>
+</TR>
+</table>
+</body>
+</html>

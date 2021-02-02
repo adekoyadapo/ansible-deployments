@@ -1,0 +1,16 @@
+---
+
+- name: Copy directory {{ project_name  }} over
+  copy:
+    src: "{{ project_name }}"
+    dest: /home/{{ ansible_user }}
+  tags:
+  - copy
+
+- name: Create and start {{ project_name  }} services
+  docker_compose:
+    project_src: "{{ project_name }}"
+  register: output
+
+- debug:
+    var: output

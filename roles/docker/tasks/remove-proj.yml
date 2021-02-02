@@ -1,0 +1,25 @@
+---
+- name: Tear down {{ project_name }} existing services
+  docker_compose:
+    project_src: "{{ project_name }}"
+    state: absent
+
+- name: Remove directory for {{ project_name  }}
+  become: true
+  file:
+    path: "{{ project_name }}"
+    state: absent
+  tags:
+  - remove
+
+- name: Prune everything
+  docker_prune:
+    containers: yes
+    images: yes
+    images_filters:
+      dangling: false
+    networks: yes
+    volumes: yes
+    builder_cache: yes
+  tags:
+  - prune

@@ -1,0 +1,8 @@
+---
+# tasks file for docker deploy
+- include: deploy.yml
+  when: project_name is defined  and remove_proj is not defined
+
+# tasks remove docker compose build
+- include: remove-proj.yml
+  when: remove_proj is defined|bool

@@ -1,0 +1,6 @@
+---
+# tasks file for foreman
+
+- name: Install the puppet and foremand rpm from a remote repo
+  yum: name={{ item }} state=present
+  loop: [ 'https://yum.puppet.com/puppet6-release-el-8.noarch.rpm', 'https://yum.theforeman.org/releases/2.2/el8/x86_64/foreman-release.rpm', 'http://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm', 'foreman-installer' ]

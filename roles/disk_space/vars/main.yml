@@ -1,0 +1,11 @@
+---
+# vars file for disk_space
+my_regex: '^(.*){{ item }}(.*)$'
+my_query: '[].[device, mount, size_total, size_available]'
+
+dev: "{{ item.0 }}"
+mount_point: "{{ item.1 }}"
+total_size: "{{ '%0.2f'| format(item.2|int / 1000000000)|float }}GB"
+used: "{{ '%0.2f'| format((item.2|int - item.3|int) / 1000000000)|float }}GB"
+free: "{{ '%0.2f'| format(item.3|int / 1000000000)|float }}GB"
+usage: "{{ '%0.1f'| format(100 * (item.2|int - item.3|int) / item.2|int)|float }}%"

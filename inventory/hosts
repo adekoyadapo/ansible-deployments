@@ -1,0 +1,11 @@
+[docker]
+dkr-rasberry.ace.home  ansible_host='10.0.0.50' ansible_user=ansible
+compute-dkr-1.ace.home  ansible_host='10.0.0.31' ansible_user=ansible ansible_ssh_password=password
+
+[docker:vars]
+#ansible_python_interpreter=/usr/bin/python3
+
+[dev]
+#ansible.ace.home ansible_ssh_user=ansible
+#centos-dev.ace.home ansible_ssh_user=ansible ansible_host='10.0.0.218' ansible_user=asible ansible_ssh_pass=password
+#dev-ubuntu  ansible_host='192.168.64.6' ansible_ssh_pass=ubuntu ansible_user=ubuntu
